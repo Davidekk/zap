@@ -48,6 +48,7 @@ const Round = () => {
         group: values.group,
         round: values.round,
       })
+      form.reset()
       toast("Hotovo 🎉", {
         className: "primary-gradient",
         description: "Prihlásenie bolo úspešné",
