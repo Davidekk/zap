@@ -25,6 +25,7 @@ import {
 import { reTry } from "@/lib/validation/validation"
 import { useState } from "react"
 import { createRound } from "@/lib/action/user.action"
+import { toast } from "sonner"
 
 const Round = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -41,12 +42,16 @@ const Round = () => {
   async function onSubmit(values: z.infer<typeof reTry>) {
     setIsSubmitting(true)
 
-    console.log(values.name, values.group, values.round)
     try {
       await createRound({
         name: values.name,
         group: values.group,
         round: values.round,
+      })
+      toast("Hotovo 🎉", {
+        className: "primary-gradient",
+        description: "Prihlásenie bolo úspešné",
+        duration: 5000,
       })
     } catch (err) {
       console.log(err)
@@ -136,7 +141,7 @@ const Round = () => {
 
         <Button
           type="submit"
-          className="primary-gradient  !text-light-900 mx-auto mt-5 w-fit"
+          className="primary-gradient  mx-auto mt-5 w-fit !text-light-900"
           disabled={isSubmitting}
         >
           {isSubmitting ? <>odosielam...</> : <>Prihlásiť sa</>}
